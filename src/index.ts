@@ -33,9 +33,9 @@ var result = treeFiller(tree, "안녕");
 console.log(result[0]);
 
 const array:Array<any> = [
-    {title:"안녕"},
-    {title:"반가워"},
-    {title:"친하게 지내자"},
+    {title:"안녕", created_date: "2022-11-17"},
+    {title:"반가워", created_date: "2022-11-10"},
+    {title:"친하게 지내자", created_date: "2022-11-15"},
 ];
 
 const arraySearch = (array:Array<any>, term:string) => {
@@ -47,4 +47,11 @@ const arraySearch = (array:Array<any>, term:string) => {
 
 var result2 = arraySearch(array, "안녕");
 console.log(result2);
+
+// const arrayNewSearch = (array:Array<any>, today:string, inDays:number) {
+//     return array.map(item=>{
+//         const isNew = item.title.includes(term);
+//         return {...item, isSearched : isSearched};
+//     });
+// }
 
