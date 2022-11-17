@@ -20,14 +20,31 @@ var tree = [
     { title: "안녕하세요3.", contents: "반갑습니다3.", children: [] },
     { title: "안녕하세요4.", contents: "반갑습니다4.", children: [] }
 ];
-var treeFiller = function (tree) {
+var treeFiller = function (tree, term) {
     return tree.map(function (item) {
-        var _item = __assign(__assign({}, item), { isSearched: true });
+        var isSearched = false;
+        if (item.title.includes(term)) {
+            isSearched = true;
+        }
+        var _item = __assign(__assign({}, item), { isSearched: isSearched });
         if (_item.children.length > 0) {
-            _item.children = treeFiller(_item.children);
+            _item.children = treeFiller(_item.children, term);
         }
         return _item;
     });
 };
-var result = treeFiller(tree);
+var result = treeFiller(tree, "안녕");
 console.log(result[0]);
+var array = [
+    { title: "안녕" },
+    { title: "반가워" },
+    { title: "친하게 지내자" },
+];
+var arraySearch = function (array, term) {
+    return array.map(function (item) {
+        var isSearched = item.title.includes(term);
+        return __assign(__assign({}, item), { isSearched: isSearched });
+    });
+};
+var result2 = arraySearch(array, "안녕");
+console.log(result2);

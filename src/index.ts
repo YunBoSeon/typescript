@@ -14,16 +14,37 @@ var tree:Array<treeItem> = [
     { title : "안녕하세요4.", contents : "반갑습니다4.", children: [] }
 ];
 
-const treeFiller = (tree:Array<treeItem>): Array<treeItem> => {
+const treeFiller = (tree:Array<treeItem>, term:string): Array<treeItem> => {
     return tree.map(item=>{
-        var _item:treeItem =  {...item, isSearched : true};
+        let isSearched = false;
+
+        if ( item.title.includes(term) ) {
+            isSearched = true;
+        }
+        const _item:treeItem =  {...item, isSearched : isSearched};
         if ( _item.children.length > 0 ) {
-            _item.children = treeFiller(_item.children);
+            _item.children = treeFiller(_item.children, term);
         }
         return _item;
     });
-
 };
 
-var result = treeFiller(tree);
+var result = treeFiller(tree, "안녕");
 console.log(result[0]);
+
+const array:Array<any> = [
+    {title:"안녕"},
+    {title:"반가워"},
+    {title:"친하게 지내자"},
+];
+
+const arraySearch = (array:Array<any>, term:string) => {
+    return array.map(item=>{
+        const isSearched = item.title.includes(term);
+        return {...item, isSearched : isSearched};
+    });
+};
+
+var result2 = arraySearch(array, "안녕");
+console.log(result2);
+
